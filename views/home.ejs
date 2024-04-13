@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" sizes="64x64" href="/assets/favicon/weather-app.png" />
+    <!-- Favicon -->
+
+    <!-- fontAwsome -->
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+    <!-- fontAwsome -->
+    
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Weather Now</title>
+
+    <script>
+        window.onload = function() {
+            const images = document.querySelectorAll('.homeBanner');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                // Hide all images
+                images.forEach(image => {
+                    image.style.display = 'none';
+                });
+                // Show the next image
+                images[currentIndex].style.display = 'block';
+                // Move to the next image
+                currentIndex = (currentIndex + 1) % images.length;
+            }, 2000);
+        };
+    </script>
+
+    <style>
+       
+body{
+    background-color: #EFFAFF;
+}
+   .homeBanner{
+    display: none;
+    width: 95%;
+    height: 95%;
+    filter: blur(4px);
+    z-index: -1;
+}
+
+
+form{
+    position: relative;
+    margin-top: 19rem;
+    margin-right: 0rem;
+}
+
+.fa-cloud{
+    color: rgb(20, 96, 138);
+
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+    
+    <div class="errorContainer">
+        <div class="HomeHeadingBg">  
+        <form action="/weather" method="GET">
+            <div class="searchArea searchArea-error">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="city" placeholder="Search for places...">
+                <!-- Add the name attribute above -->
+                <button type="submit" class="searchBtnError">Find</button>
+            </div>
+        </form>
+
+       
+
+        <p class="HomeHeading">Search the city for weather</p>
+        <i class="fa-solid fa-cloud"></i>   
+        
+    </div>
+
+    </div>
+
+    <img class="homeBanner" src="/assets/homeBanner/extreme-weather-events.svg" alt="">
+    <img class="homeBanner" src="/assets/homeBanner/snowy-winter-landscape.svg" alt="">
+    <img class="homeBanner" src="/assets/homeBanner/world-climate-and-architecture (1).svg" alt="">
+    <img class="homeBanner" src="/assets/homeBanner/world-climate-and-architecture (2).svg" alt="">
+    <img class="homeBanner" src="/assets/homeBanner/world-climate-and-architecture (3).svg" alt="">
+    <img class="homeBanner" src="/assets/homeBanner/world-climate-and-architecture (4).svg" alt="">
+    <img class="homeBanner" src="/assets/homeBanner/world-climate-and-architecture.svg" alt="">
+</body>
+</html>

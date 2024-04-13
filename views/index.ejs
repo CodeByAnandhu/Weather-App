@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" sizes="64x64" href="/assets/favicon/weather-app.png" />
+    <!-- Favicon -->
+
+    <!-- fontAwsome -->
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+    <!-- fontAwsome -->
+    
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Weather Now</title>
+
+</head>
+
+
+<body>
+    <%if(error){%>
+    <img class="errorCloudBg" style="width: 100%;" src="/assets/amcharts_weather_icons_1.0.0/static/world-climate-and-architecture (1).svg" alt="error cloud">
+    <%}%>
+
+    <main>
+
+        <%if(error){%>
+
+            <div class="errorContainer">
+            
+                <form action="/weather" method="GET">
+                    <div class="searchArea searchArea-error">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" name="city" placeholder="Search for places...">
+                        <!-- Add the name attribute above -->
+                        <button type="submit" class="searchBtnError">Find</button>
+                    </div>
+                </form>
+
+               <div class="errorBlock">
+                <p class="error"><%=error%></p>     
+                <img class="errorCloud" src="/assets/amcharts_weather_icons_1.0.0/static/error cloud.svg" alt="error cloud">
+
+            </div>
+
+            </div>
+
+            <%}else{%>
+
+        <section class="leftside">
+           
+            <form action="/weather" method="GET">
+                <div class="searchArea">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" name="city" placeholder="Search place" required>
+                    <!-- Add the name attribute above -->
+                    <button type="submit" class="searchBtn">Find</button>
+                </div>
+            </form>
+            
+          
+            <%if(weather.weather[0].description === "mist"){%>
+
+                <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-night-3.svg" alt="">
+
+                <%} else if(weather && weather.main.temp < -10 ){%>
+
+                    <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/snowy-5.svg" alt="">
+
+                <%}else if(weather && weather.weather[0].description.includes("clouds")) {%>
+
+                    <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy.svg" alt="">
+
+                <%}else if(weather.weather[0].description.includes("rain")){%>
+
+            <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/rainy-7.svg" alt="">
+
+            <%} else if(weather && weather.main.temp < -10 && weather.weather[0].icon.endsWith('d')){%>
+
+                <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/snowy-1.svg" alt="">
+
+                <%} else if(weather && weather.main.temp < -10 && weather.weather[0].icon.endsWith('n')){%>
+
+                    <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/snowy-5.svg" alt="">
+
+            <%}else if(weather.weather[0].icon.endsWith('d')){%>
+
+                <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/day.svg" alt="">
+
+            <%}else if(weather.weather[0].icon.endsWith('n')){%>
+
+                <img class="DaySVG" src="/assets/amcharts_weather_icons_1.0.0/animated/night.svg" alt="">
+
+                <%}%>
+
+            <div class="temperatureMain">
+            <div class="temperature">
+                <h1 class="temp"><%=weather.main.temp.toFixed(2)%>°C</h1>
+            </div>
+            <div class="date-Time">
+                <% if (weather) { %>
+                    <% const timestamp = (weather.dt + weather.timezone) * 1000; %>
+                    <% const date = new Date(timestamp); %>
+                    <% const dayOptions = { weekday: 'long' }; %>
+                    <% const timeOptions = { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }; %>
+                    <% const dayFormatter = new Intl.DateTimeFormat('en-US', dayOptions); %>
+                    <% const timeFormatter = new Intl.DateTimeFormat('en-US', timeOptions); %>
+                    <span class="day"><%= dayFormatter.format(date) %>,</span>
+                    <span class="time"><%= timeFormatter.format(date) %></span>
+                <% } %>
+                
+                
+            </div>
+            
+            
+            
+            
+            
+            
+            </div>
+
+            <div class="detailsOfPlaceMain">
+
+                 <div class="someDetails">
+                    <i class="fa-solid fa-cloud"></i>  <span class="weatherType"><%= weather.weather[0].description %></span>
+                    <i class="fa-solid fa-temperature-low"></i> <span class="weatherType">Feels Like <%= weather.main.feels_like.toFixed(2) %>°C</span>
+                 </div>
+                 
+                 <div class="city">
+                    <h3 class="cityname"><%=weather.name%></h3>
+                    <img src="/assets/Download Beautiful Pine Forest Mountain Panorama Landscape Flat Illustration for free.jpeg" alt="">
+                 </div>
+            </div>
+
+        </section>
+
+        <section class="mainRight">
+            <div class="headlineCover">
+            <h3 class="headline">Weather</h3>
+           </div>
+
+        <div class="wrapperr">
+
+           <div class="daysCard">
+               <div class="card">
+                   <div class="cardHead">
+                        <h4>Wind</h4>
+                   </div>
+                   <!-- <img src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-day-2.svg" alt=""> -->
+                   <i class="fa-solid fa-wind iconOfCard"></i>
+                   <span class="windSpeed"><%= (weather.wind.speed * 3.6).toFixed(2) %> km/h</span>
+               </div>
+               <div class="card">
+                   <div class="cardHead">
+                        <h4>Humidity</h4>
+                   </div>
+                   <!-- <img src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-day-2.svg" alt=""> -->
+                   <i class="fa-solid fa-droplet iconOfCard"></i>
+                   <span class="windSpeed"><%= weather.main.humidity %> %</span>
+               </div>
+                <div class="card">
+                    <div class="cardHead">
+                            <h4>Pressure</h4>
+                    </div>
+                    <!-- <img src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-day-2.svg" alt=""> -->
+                    <i class="fa-solid fa-gauge-high iconOfCard"></i>
+                    <span class="windSpeed"><%= weather.main.pressure %> hPa</span>
+                    
+                </div>
+           </div>
+
+           <div class="daysCard">
+            <div class="card">
+                <div class="cardHead">
+                     <h4>Visibility</h4>
+                </div>
+                <!-- <img src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-day-2.svg" alt=""> -->
+                <i class="fa-solid fa-water iconOfCard"></i>
+                <span class="windSpeed">Visibility <%= weather.visibility %>m</span>
+            </div>
+            <div class="card">
+                <div class="cardHead">
+                     <h4>Sunrise</h4>
+                </div>
+                <img class="sunriseIcon" src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-day-1.svg" alt="">
+                <!-- <i class="fa-solid fa-droplet iconOfCard"></i> -->
+                <% const sunriseTimestamp = (weather.sys.sunrise + weather.timezone) * 1000; %>
+                <% const sunsetTimestamp = (weather.sys.sunset + weather.timezone) * 1000; %>
+                
+                <% const sunriseDate = new Date(sunriseTimestamp); %>
+                <% const sunsetDate = new Date(sunsetTimestamp); %>
+                
+                <span class="windSpeed"><%= sunriseDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }) %></span>
+                
+            </div>
+             <div class="card">
+                 <div class="cardHead">
+                         <h4>Sunset</h4>
+                 </div>
+                 <img class="sunriseIcon" src="/assets/amcharts_weather_icons_1.0.0/animated/cloudy-night-3.svg" alt="">
+                 <!-- <i class="fa-solid fa-gauge-high iconOfCard"></i> -->
+                
+                <span class="windSpeed"><%= sunsetDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }) %></span>
+                 
+             </div>
+        </div>
+
+        </div>
+
+           
+
+        </section>
+
+        <%}%>
+
+    </main>
+
+
+    <script>
+        function getDayOfWeek(timestamp) {
+          const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          const date = new Date(timestamp * 1000);
+          return daysOfWeek[date.getDay()];
+        }
+        
+        function getTime(timestamp) {
+          const date = new Date(timestamp * 1000);
+          return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+        </script>
+        
+
+</body>
+</html>

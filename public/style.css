@@ -16,6 +16,7 @@ body{
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
 main{
@@ -92,7 +93,7 @@ main{
 }
 .temperature h1{
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 70px;
+    font-size: 56px;
     font-weight: 400;
     color: #565656;
 }
@@ -175,11 +176,12 @@ span.time{
 }
 
 .daysCard{
-    margin-top: 2rem;
+    margin-top: 5rem;
+    margin-left: 0rem;
     display: flex;
     gap: 10px;
     padding: 50px;
-    
+    margin-bottom: -10rem;
 }
 
 @keyframes slideLetf {
@@ -188,25 +190,34 @@ span.time{
 }
 
 .card{
-    height: 9rem;
+    height: 12rem;
+    margin-right: 0.50rem;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 20px;
     background-color: #ffffff;
-    width: 8.1rem;
+    width: 12.1rem;
     border-radius: 25px;
     padding: 20px;
     transition: transform 0.35s ease-in-out;
     animation: slideLetf 1s ease forwards; 
 }
+
 .card:hover{
-    box-shadow: 25px 25px 52px 2px rgba(209, 209, 209, 0.815);
-    transform: scale(1.40);
+    box-shadow: 25px 25px 52px 2px rgba(209, 209, 209, 0.452);
+    transform: scale(1.10);
 }
 .card img{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.card span{
+
+    font-size: 16px;
+    color: rgba(26, 117, 197, 0.717);
 }
 
 .cardHead {
@@ -216,18 +227,26 @@ span.time{
 }
 
 .cardHead h4{
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 400;
     color: #797979;
     
 
 }
 
-.cardTemperature{
-    font-size: 14px;
+.windSpeed{
+    font-size: 10px;
     position: relative; 
-    bottom: 1.5rem;
+    bottom: -1.5rem;
     color: #797979;
+}
+
+.iconOfCard{
+
+    position: relative;
+    top: 11px;
+    font-size: 33px;
+    color: #414140;
 }
 
 .headline{
@@ -249,4 +268,107 @@ span.time{
     margin-left: 2rem;
 }
 
+.errorContainer{
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    display: flex;
+}
 
+.errorBlock{
+    position: relative;
+    display: flex;
+    top: 3rem;
+    left: -2rem;
+    background-color: #f4f3f3cc;
+    padding: 10px 75px;
+    border-radius: 25px;
+    
+}
+.error{
+    
+    
+    color: rgb(68, 68, 68);
+    font-size: 2rem;
+    font-weight: 700;
+    position: relative;
+    top: 2rem;
+
+}
+
+
+
+.errorCloud{
+
+    width: 7rem;
+    height:7rem;
+    margin-left: 1rem;
+}
+
+.searchArea-error{
+
+    position: absolute;
+    bottom: 14rem;
+    left: 0.0rem;
+}
+
+.searchArea-error input{
+    width: 20rem;
+    height: 3rem;
+}
+
+.searchBtn{
+    position: relative;
+    left: 0.40rem;
+    background-color: #2474ed8f;
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 25px;
+
+}
+
+.searchBtnError{
+    position: relative;
+    left: 0.40rem;
+    background-color: #2474ed8f;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.sunriseIcon{
+    position: relative;
+    margin-bottom: -3rem;
+    margin-top: -1rem;
+    width: 6rem;
+}
+
+
+
+.HomeHeadingBg{
+    position: relative;
+    display: flex;
+    top: -4.3rem;
+    left: -7rem;
+    background-color: #ffffff42;
+    border: 2px solid #ffffff46;
+    box-shadow: 0px -3px 16px 0px #dedddd36;
+    padding: 30px 130px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.HomeHeading{
+
+    color: rgb(20, 96, 138);
+    font-size: 1.9rem;
+    top: 1.1rem;
+    font-weight: 700;
+    position: relative;
+    left: 1rem;
+    
+}
